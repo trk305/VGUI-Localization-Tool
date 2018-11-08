@@ -22,7 +22,9 @@ namespace VGUILocalizationTool
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 if (cbLocal.Text != "")
+                {
                     Properties.Settings.Default.DefLang = cbLocal.Text;
+                }
 
                 tbEnglish.Text = openFileDialog1.FileName;
                 string path = Path.GetDirectoryName(tbEnglish.Text);
@@ -43,7 +45,9 @@ namespace VGUILocalizationTool
                 foreach (string fn in allfiles)
                 {
                     if (fn.IndexOf("_english") == -1)
+                    {
                         cbLocal.Items.Add(fn.Substring(pos));
+                    }
                 }
 
                 localizationDataBindingSource.DataSource = new List<LocalizationData>();
@@ -51,8 +55,11 @@ namespace VGUILocalizationTool
                 if (Properties.Settings.Default.DefLang != "")
                 {
                     int i = cbLocal.Items.IndexOf(Properties.Settings.Default.DefLang);
+
                     if (i >= 0)
+                    {
                         cbLocal.SelectedIndex = i;
+                    }
                 }
             }
         }
@@ -60,33 +67,49 @@ namespace VGUILocalizationTool
         private void btnAdd_Click(object sender, EventArgs e)
         {
             AddLocal local = new AddLocal();
+
             if (local.ShowDialog() == DialogResult.OK)
+            {
                 cbLocal.Items.Add(local.tbLocal.Text);
+            }
         }
 
         ValveLocalizationFile file;
 
-        bool Locolaized(string en, string lc)
+        bool Localized(string en, string lc)
         {
             if (lc == null)
+            {
                 return false;
+            }
             else if (en.Length <= 2)
+            {
                 return true;
+            }
             else if (en.Length == lc.Length)
             {
                 if (en != lc)
+                {
                     return true;
+                }
                 else
                 {
                     foreach (char c in en)
+                    {
                         if (Char.IsLetter(c))
+                        {
                             return false;
-                    // skip text without letters
+                        }
+                    }
+
+                    // Skip text without letters
                     return true;
                 }
             }
             else
+            {
                 return true;
+            }
         }
 
         private void cbLocal_SelectedIndexChanged(object sender, EventArgs e)
@@ -100,12 +123,12 @@ namespace VGUILocalizationTool
             foreach (var en in eng)
             {
                 if (en.ID == null)
+                {
                     continue;
+                }
                 tcount++;
 
-                var lc = (from l in loc
-                         where en.ID == l.ID
-                          select l).SingleOrDefault();
+                var lc = (from l in loc where en.ID == l.ID select l).SingleOrDefault();
                 en.English = en.Localized;
                 en.DelimeterEnglish = en.DelimeterLocalized;
                 if (lc != null && lc.Localized != null)
@@ -115,12 +138,16 @@ namespace VGUILocalizationTool
                     en.Localized = lc.Localized;
                     en.UseSlashN = lc.UseSlashN;
                     en.DelimeterLocalized = lc.DelimeterLocalized;
-                    if (Locolaized(en.English, lc.Localized))
+                    if (Localized(en.English, lc.Localized))
+                    {
                         lcount++;
+                    }
                 }
             }
             if (tcount == 0)
+            {
                 tcount = 1;
+            }
             lblPerc.Text = String.Format("{0:F}%", (1.0f * lcount / tcount) * 100);
             localizationDataBindingSource.DataSource = eng;
         }
@@ -128,7 +155,9 @@ namespace VGUILocalizationTool
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (file == null)
+            {
                 return;
+            }
             List<LocalizationData> loc = (List<LocalizationData>)localizationDataBindingSource.DataSource;
             file.WithEnglishText = cbSaveWithEnglish.Checked;
             file.DontSaveNotLocalized = cbDontSaveNotLocalized.Checked;
@@ -143,7 +172,7 @@ namespace VGUILocalizationTool
                 localizationDataBindingSource.MoveNext();
                 data = (LocalizationData) localizationDataBindingSource.Current;
             } while ((localizationDataBindingSource.Position + 1 < localizationDataBindingSource.Count) &&
-                (data.ID == null || (!data.EnglishTextChanged && Locolaized(data.English, data.Localized))));
+                (data.ID == null || (!data.EnglishTextChanged && Localized(data.English, data.Localized))));
             this.Invalidate();
         }
 
@@ -155,7 +184,9 @@ namespace VGUILocalizationTool
             Properties.Settings.Default.EnglishDefault = dialog.rbEnglish.Checked;
             Properties.Settings.Default.LocalizedDefault = dialog.rbLocalized.Checked;
             if (cbLocal.Text != "")
+            {
                 Properties.Settings.Default.DefLang = cbLocal.Text;
+            }
             Properties.Settings.Default.Save();
         }
 
@@ -200,11 +231,17 @@ namespace VGUILocalizationTool
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.Q)
+            {
                 btnNext_Click(null, null);
+            }
             else if (e.Control && e.KeyCode == Keys.F)
+            {
                 btFind_Click(null, null);
+            }
             else if (e.KeyCode == Keys.F3)
+            {
                 FindNext();            
+            }
         }
 
         private void btFind_Click(object sender, EventArgs e)
