@@ -138,6 +138,7 @@ namespace VGUILocalizationTool
                     en.Localized = lc.Localized;
                     en.UseSlashN = lc.UseSlashN;
                     en.DelimeterLocalized = lc.DelimeterLocalized;
+                    en.DelimeterEnglish = lc.DelimeterEnglish;
                     if (Localized(en.English, lc.Localized))
                     {
                         lcount++;

@@ -14,7 +14,9 @@ namespace VGUILocalizationTool
             this.englishFile = englishFile;
         }
 
-        public bool WithoutLang { get; set; }
+        public string LangKey { get; set; }
+        public string LanguageKey { get; set; }
+        public string TokensKey { get; set; }
         public bool WithEnglishText { get; set; }
         public bool DontSaveNotLocalized { get; set; }
 
@@ -111,7 +113,9 @@ namespace VGUILocalizationTool
 
         public List<LocalizationData> ReadData(string local)
         {
-            WithoutLang = false;
+            LangKey = null;
+            LanguageKey = "Language";
+            TokensKey = "Tokens";
             WithEnglishText = false;
             List<LocalizationData> data = new List<LocalizationData>();
             string fileName = GetLocalFileName(local);
@@ -174,14 +178,14 @@ namespace VGUILocalizationTool
                                 {
                                     continue;
                                 }
-                                if (tokens[i] == "lang")
+                                if (tokens[i].Equals("Lang", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    WithoutLang = false;
+                                    LangKey = tokens[i];
                                     l++;
                                 }
-                                else if (tokens[i] == "Language")
+                                else if (tokens[i].Equals("Language", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    WithoutLang = true;
+                                    LanguageKey = tokens[i];
                                     l = 3;
                                 }
                                 break;
@@ -200,8 +204,9 @@ namespace VGUILocalizationTool
                                 {
                                     continue;
                                 }
-                                if (tokens[i] == "Language")
+                                if (tokens[i].Equals("Language", StringComparison.OrdinalIgnoreCase))
                                 {
+                                    LanguageKey = tokens[i];
                                     l++;
                                 }
                                 break;
@@ -210,8 +215,9 @@ namespace VGUILocalizationTool
                                 {
                                     continue;
                                 }
-                                if (tokens[i] == "Tokens")
+                                if (tokens[i].Equals("Tokens", StringComparison.OrdinalIgnoreCase))
                                 {
+                                    TokensKey = tokens[i];
                                     l++;
                                 }
                                 break;
@@ -323,17 +329,19 @@ namespace VGUILocalizationTool
                 }
                 File.Move(fileName, fileNameBak);
             }
-            //local = local.Substring(0, 1).ToUpper() + local.Substring(1);
+            local = char.ToUpper(local[0]) + local.Substring(1);
             using (StreamWriter sw = new StreamWriter(fileName, false, System.Text.Encoding.Unicode))
             {
-                if (!WithoutLang)
+                if (LangKey != null)
                 {
-                    sw.WriteLine("\"lang\"");
+                    sw.WriteLine("\"" + LangKey + "\"");
                     sw.WriteLine("{");
+                    sw.Write("\t");
                 }
-                sw.WriteLine(String.Format("\"Language\" \"{0}\" ", local));
-                sw.WriteLine("\"Tokens\"");
-                sw.WriteLine("{");
+                sw.WriteLine(String.Format("\"" + LanguageKey + "\"\t\"{0}\"", local));
+                sw.WriteLine();
+                sw.WriteLine("\t\"" + TokensKey + "\"");
+                sw.WriteLine("\t{");
                 foreach (var d in data)
                 {
                     if (d.ID != null)
@@ -379,11 +387,11 @@ namespace VGUILocalizationTool
                         sw.WriteLine(d.DelimeterID);
                     }
                 }
-                sw.WriteLine("}");
-                if (!WithoutLang)
+                if (LangKey != null)
                 {
-                    sw.WriteLine("}");
+                    sw.WriteLine("\t}");
                 }
+                sw.WriteLine("}");
                 sw.Close();
             }
         }
