@@ -183,6 +183,7 @@ namespace VGUILocalizationTool
             Properties.Settings.Default.IDDefault = dialog.rbID.Checked;
             Properties.Settings.Default.EnglishDefault = dialog.rbEnglish.Checked;
             Properties.Settings.Default.LocalizedDefault = dialog.rbLocalized.Checked;
+            Properties.Settings.Default.SaveBackup = cbSaveBackup.Checked;
             if (cbLocal.Text != "")
             {
                 Properties.Settings.Default.DefLang = cbLocal.Text;

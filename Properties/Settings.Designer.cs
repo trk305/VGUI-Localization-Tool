@@ -94,5 +94,17 @@ namespace VGUILocalizationTool.Properties {
                 this["DefLang"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SaveBackup {
+            get {
+                return ((bool)(this["SaveBackup"]));
+            }
+            set {
+                this["SaveBackup"] = value;
+            }
+        }
     }
 }
