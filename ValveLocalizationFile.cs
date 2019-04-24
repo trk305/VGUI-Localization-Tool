@@ -233,17 +233,13 @@ namespace VGUILocalizationTool
                                 break;
                             case 5:
                                 LocalizationData cd;
-                                if (i == -1 || tokens[i].StartsWith("//"))
+                                if (i == -1)
                                 {
                                     cd = new LocalizationData();
-                                    if (tokens.Length > 0)
-                                    {
-                                        cd.DelimeterID = line;
-                                    }
                                     data.Add(cd);
                                     continue;
                                 }
-                                if (tokens[i] == "}")
+                                else if (tokens[i] == "}")
                                 {
                                     l++;
                                     continue;
