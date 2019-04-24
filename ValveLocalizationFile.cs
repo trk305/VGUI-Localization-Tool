@@ -358,16 +358,16 @@ namespace VGUILocalizationTool
                         loc = loc.Replace("\"", "\\\"");
                         string line = String.Format("{0}\"{1}\"{2}\"{3}\"", d.DelimeterID, d.ID, d.DelimeterLocalized, loc);
                         sw.WriteLine(line);
-                        if (WithEnglishText && d.EnglishOld != null)
+                        if (WithEnglishText)
                         {
                             string eng;
-                            if (!d.EnglishTextChanged)
+                            if (d.EnglishTextChanged)
                             {
-                                eng = d.English;
+                                eng = d.EnglishOld;
                             }
                             else
                             {
-                                eng = d.EnglishOld;
+                                eng = d.English;
                             }
                             if (d.UseSlashN)
                             {
