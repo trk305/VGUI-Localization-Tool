@@ -40,6 +40,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btFind = new System.Windows.Forms.Button();
             this.cbUseSlashN = new System.Windows.Forms.CheckBox();
             this.cbSaveWithEnglish = new System.Windows.Forms.CheckBox();
             this.cbDontSaveNotLocalized = new System.Windows.Forms.CheckBox();
@@ -51,7 +52,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.btFind = new System.Windows.Forms.Button();
+            this.cbSaveBackup = new System.Windows.Forms.CheckBox();
             this.localizationDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.englishDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localizedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,9 +63,9 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -74,10 +75,11 @@
             this.EnglishTextChanged,
             this.localizedDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.localizationDataBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 74);
+            this.dataGridView1.Location = new System.Drawing.Point(9, 60);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(832, 244);
+            this.dataGridView1.Size = new System.Drawing.Size(624, 198);
             this.dataGridView1.TabIndex = 7;
             // 
             // ID
@@ -95,42 +97,46 @@
             this.EnglishTextChanged.FillWeight = 40F;
             this.EnglishTextChanged.HeaderText = "English Text Changed";
             this.EnglishTextChanged.Name = "EnglishTextChanged";
-            this.EnglishTextChanged.Width = 137;
+            this.EnglishTextChanged.Width = 105;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 12);
+            this.label1.Location = new System.Drawing.Point(14, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 17);
+            this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "English";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 46);
+            this.label2.Location = new System.Drawing.Point(14, 37);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 17);
+            this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Localized";
             // 
             // tbEnglish
             // 
-            this.tbEnglish.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbEnglish.Location = new System.Drawing.Point(105, 9);
+            this.tbEnglish.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbEnglish.Location = new System.Drawing.Point(79, 7);
+            this.tbEnglish.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbEnglish.Name = "tbEnglish";
             this.tbEnglish.ReadOnly = true;
-            this.tbEnglish.Size = new System.Drawing.Size(658, 22);
+            this.tbEnglish.Size = new System.Drawing.Size(494, 20);
             this.tbEnglish.TabIndex = 1;
             // 
             // btnOpen
             // 
             this.btnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpen.Location = new System.Drawing.Point(769, 9);
+            this.btnOpen.Location = new System.Drawing.Point(577, 7);
+            this.btnOpen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(75, 24);
+            this.btnOpen.Size = new System.Drawing.Size(56, 20);
             this.btnOpen.TabIndex = 2;
             this.btnOpen.Text = "Open...";
             this.btnOpen.UseVisualStyleBackColor = true;
@@ -138,22 +144,24 @@
             // 
             // cbLocal
             // 
-            this.cbLocal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbLocal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbLocal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocal.FormattingEnabled = true;
-            this.cbLocal.Location = new System.Drawing.Point(103, 43);
+            this.cbLocal.Location = new System.Drawing.Point(77, 35);
+            this.cbLocal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbLocal.Name = "cbLocal";
-            this.cbLocal.Size = new System.Drawing.Size(579, 24);
+            this.cbLocal.Size = new System.Drawing.Size(435, 21);
             this.cbLocal.TabIndex = 4;
             this.cbLocal.SelectedIndexChanged += new System.EventHandler(this.cbLocal_SelectedIndexChanged);
             // 
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Location = new System.Drawing.Point(688, 41);
+            this.btnAdd.Location = new System.Drawing.Point(516, 33);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 27);
+            this.btnAdd.Size = new System.Drawing.Size(56, 22);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Add...";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -162,9 +170,10 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(769, 41);
+            this.btnSave.Location = new System.Drawing.Point(577, 33);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 27);
+            this.btnSave.Size = new System.Drawing.Size(56, 22);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -172,8 +181,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.cbSaveBackup);
             this.panel1.Controls.Add(this.btFind);
             this.panel1.Controls.Add(this.cbUseSlashN);
             this.panel1.Controls.Add(this.cbSaveWithEnglish);
@@ -185,19 +195,33 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Location = new System.Drawing.Point(12, 324);
+            this.panel1.Location = new System.Drawing.Point(9, 263);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(832, 211);
+            this.panel1.Size = new System.Drawing.Size(624, 171);
             this.panel1.TabIndex = 0;
+            // 
+            // btFind
+            // 
+            this.btFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btFind.Location = new System.Drawing.Point(562, 31);
+            this.btFind.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btFind.Name = "btFind";
+            this.btFind.Size = new System.Drawing.Size(56, 19);
+            this.btFind.TabIndex = 8;
+            this.btFind.Text = "Find...";
+            this.btFind.UseVisualStyleBackColor = true;
+            this.btFind.Click += new System.EventHandler(this.btFind_Click);
             // 
             // cbUseSlashN
             // 
             this.cbUseSlashN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbUseSlashN.AutoSize = true;
             this.cbUseSlashN.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.localizationDataBindingSource, "UseSlashN", true));
-            this.cbUseSlashN.Location = new System.Drawing.Point(749, 179);
+            this.cbUseSlashN.Location = new System.Drawing.Point(556, 145);
+            this.cbUseSlashN.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbUseSlashN.Name = "cbUseSlashN";
-            this.cbUseSlashN.Size = new System.Drawing.Size(71, 21);
+            this.cbUseSlashN.Size = new System.Drawing.Size(59, 17);
             this.cbUseSlashN.TabIndex = 5;
             this.cbUseSlashN.Text = "Use \\n";
             this.cbUseSlashN.UseVisualStyleBackColor = true;
@@ -206,9 +230,10 @@
             // 
             this.cbSaveWithEnglish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSaveWithEnglish.AutoSize = true;
-            this.cbSaveWithEnglish.Location = new System.Drawing.Point(473, 9);
+            this.cbSaveWithEnglish.Location = new System.Drawing.Point(350, 7);
+            this.cbSaveWithEnglish.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbSaveWithEnglish.Name = "cbSaveWithEnglish";
-            this.cbSaveWithEnglish.Size = new System.Drawing.Size(165, 21);
+            this.cbSaveWithEnglish.Size = new System.Drawing.Size(129, 17);
             this.cbSaveWithEnglish.TabIndex = 6;
             this.cbSaveWithEnglish.Text = "Save with english text";
             this.cbSaveWithEnglish.UseVisualStyleBackColor = true;
@@ -217,38 +242,42 @@
             // 
             this.cbDontSaveNotLocalized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbDontSaveNotLocalized.AutoSize = true;
-            this.cbDontSaveNotLocalized.Location = new System.Drawing.Point(644, 9);
+            this.cbDontSaveNotLocalized.Location = new System.Drawing.Point(479, 7);
+            this.cbDontSaveNotLocalized.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbDontSaveNotLocalized.Name = "cbDontSaveNotLocalized";
-            this.cbDontSaveNotLocalized.Size = new System.Drawing.Size(180, 21);
+            this.cbDontSaveNotLocalized.Size = new System.Drawing.Size(139, 17);
             this.cbDontSaveNotLocalized.TabIndex = 7;
             this.cbDontSaveNotLocalized.Text = "Don\'t save not localized";
             this.cbDontSaveNotLocalized.UseVisualStyleBackColor = true;
             // 
             // lblID
             // 
-            this.lblID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.localizationDataBindingSource, "ID", true));
-            this.lblID.Location = new System.Drawing.Point(15, 10);
+            this.lblID.Location = new System.Drawing.Point(11, 8);
+            this.lblID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(452, 17);
+            this.lblID.Size = new System.Drawing.Size(245, 14);
             this.lblID.TabIndex = 0;
             // 
             // lblPerc
             // 
             this.lblPerc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPerc.Location = new System.Drawing.Point(754, 142);
+            this.lblPerc.Location = new System.Drawing.Point(566, 115);
+            this.lblPerc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPerc.Name = "lblPerc";
-            this.lblPerc.Size = new System.Drawing.Size(65, 17);
+            this.lblPerc.Size = new System.Drawing.Size(49, 14);
             this.lblPerc.TabIndex = 9;
             this.lblPerc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnNext
             // 
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNext.Location = new System.Drawing.Point(749, 67);
+            this.btnNext.Location = new System.Drawing.Point(562, 54);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.Size = new System.Drawing.Size(56, 19);
             this.btnNext.TabIndex = 9;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
@@ -257,47 +286,51 @@
             // textBox2
             // 
             this.textBox2.AcceptsReturn = true;
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.localizationDataBindingSource, "Localized", true));
-            this.textBox2.Location = new System.Drawing.Point(91, 122);
+            this.textBox2.Location = new System.Drawing.Point(68, 99);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox2.Size = new System.Drawing.Size(652, 78);
+            this.textBox2.Size = new System.Drawing.Size(490, 64);
             this.textBox2.TabIndex = 4;
             this.textBox2.WordWrap = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 157);
+            this.label4.Location = new System.Drawing.Point(11, 128);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 17);
+            this.label4.Size = new System.Drawing.Size(52, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "Localized";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 52);
+            this.label3.Location = new System.Drawing.Point(10, 42);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 17);
+            this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "English";
             // 
             // textBox1
             // 
             this.textBox1.AcceptsReturn = true;
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.localizationDataBindingSource, "English", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.textBox1.Location = new System.Drawing.Point(91, 38);
+            this.textBox1.Location = new System.Drawing.Point(68, 31);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(652, 78);
+            this.textBox1.Size = new System.Drawing.Size(490, 64);
             this.textBox1.TabIndex = 2;
             this.textBox1.WordWrap = false;
             // 
@@ -307,16 +340,18 @@
             this.openFileDialog1.Filter = "English text|*_english.txt|All files|*.txt *.res";
             this.openFileDialog1.InitialDirectory = global::VGUILocalizationTool.Properties.Settings.Default.InitialDir;
             // 
-            // btFind
+            // cbSaveBackup
             // 
-            this.btFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btFind.Location = new System.Drawing.Point(749, 38);
-            this.btFind.Name = "btFind";
-            this.btFind.Size = new System.Drawing.Size(75, 23);
-            this.btFind.TabIndex = 8;
-            this.btFind.Text = "Find...";
-            this.btFind.UseVisualStyleBackColor = true;
-            this.btFind.Click += new System.EventHandler(this.btFind_Click);
+            this.cbSaveBackup.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::VGUILocalizationTool.Properties.Settings.Default, "SaveBackup", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbSaveBackup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbSaveBackup.AutoSize = true;
+            this.cbSaveBackup.Location = new System.Drawing.Point(260, 7);
+            this.cbSaveBackup.Margin = new System.Windows.Forms.Padding(2);
+            this.cbSaveBackup.Name = "cbSaveBackup";
+            this.cbSaveBackup.Size = new System.Drawing.Size(90, 17);
+            this.cbSaveBackup.TabIndex = 10;
+            this.cbSaveBackup.Text = "Save backup";
+            this.cbSaveBackup.UseVisualStyleBackColor = true;
             // 
             // localizationDataBindingSource
             // 
@@ -340,9 +375,9 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(856, 547);
+            this.ClientSize = new System.Drawing.Size(642, 444);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnAdd);
@@ -353,6 +388,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MainForm";
             this.Text = "VGUI Localization Tool";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
@@ -394,6 +430,7 @@
         private System.Windows.Forms.CheckBox cbSaveWithEnglish;
         private System.Windows.Forms.CheckBox cbUseSlashN;
         private System.Windows.Forms.Button btFind;
+        private System.Windows.Forms.CheckBox cbSaveBackup;
     }
 }
 

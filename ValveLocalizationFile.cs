@@ -14,7 +14,9 @@ namespace VGUILocalizationTool
             this.englishFile = englishFile;
         }
 
-        public bool WithoutLang { get; set; }
+        public string LangKey { get; set; }
+        public string LanguageKey { get; set; }
+        public string TokensKey { get; set; }
         public bool WithEnglishText { get; set; }
         public bool DontSaveNotLocalized { get; set; }
 
@@ -111,7 +113,9 @@ namespace VGUILocalizationTool
 
         public List<LocalizationData> ReadData(string local)
         {
-            WithoutLang = false;
+            LangKey = null;
+            LanguageKey = "Language";
+            TokensKey = "Tokens";
             WithEnglishText = false;
             List<LocalizationData> data = new List<LocalizationData>();
             string fileName = GetLocalFileName(local);
@@ -174,14 +178,14 @@ namespace VGUILocalizationTool
                                 {
                                     continue;
                                 }
-                                if (tokens[i] == "lang")
+                                if (tokens[i].Equals("Lang", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    WithoutLang = false;
+                                    LangKey = tokens[i];
                                     l++;
                                 }
-                                else if (tokens[i] == "Language")
+                                else if (tokens[i].Equals("Language", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    WithoutLang = true;
+                                    LanguageKey = tokens[i];
                                     l = 3;
                                 }
                                 break;
@@ -200,8 +204,9 @@ namespace VGUILocalizationTool
                                 {
                                     continue;
                                 }
-                                if (tokens[i] == "Language")
+                                if (tokens[i].Equals("Language", StringComparison.OrdinalIgnoreCase))
                                 {
+                                    LanguageKey = tokens[i];
                                     l++;
                                 }
                                 break;
@@ -210,8 +215,9 @@ namespace VGUILocalizationTool
                                 {
                                     continue;
                                 }
-                                if (tokens[i] == "Tokens")
+                                if (tokens[i].Equals("Tokens", StringComparison.OrdinalIgnoreCase))
                                 {
+                                    TokensKey = tokens[i];
                                     l++;
                                 }
                                 break;
@@ -227,17 +233,13 @@ namespace VGUILocalizationTool
                                 break;
                             case 5:
                                 LocalizationData cd;
-                                if (i == -1 || tokens[i].StartsWith("//"))
+                                if (i == -1)
                                 {
                                     cd = new LocalizationData();
-                                    if (tokens.Length > 0)
-                                    {
-                                        cd.DelimeterID = line;
-                                    }
                                     data.Add(cd);
                                     continue;
                                 }
-                                if (tokens[i] == "}")
+                                else if (tokens[i] == "}")
                                 {
                                     l++;
                                     continue;
@@ -313,23 +315,29 @@ namespace VGUILocalizationTool
         public void WriteData(string local, List<LocalizationData> data)
         {
             string fileName = GetLocalFileName(local);
-            string fileNameBak = fileName + ".bak";
-            if (File.Exists(fileNameBak))
+            bool shouldSaveBak = global::VGUILocalizationTool.Properties.Settings.Default.SaveBackup;
+            if (shouldSaveBak)
             {
-                File.Delete(fileNameBak);
+                string fileNameBak = fileName + ".bak";
+                if (File.Exists(fileNameBak))
+                {
+                    File.Delete(fileNameBak);
+                }
+                File.Move(fileName, fileNameBak);
             }
-            File.Move(fileName, fileNameBak);
-            //local = local.Substring(0, 1).ToUpper() + local.Substring(1);
+            local = char.ToUpper(local[0]) + local.Substring(1);
             using (StreamWriter sw = new StreamWriter(fileName, false, System.Text.Encoding.Unicode))
             {
-                if (!WithoutLang)
+                if (LangKey != null)
                 {
-                    sw.WriteLine("\"lang\"");
+                    sw.WriteLine("\"" + LangKey + "\"");
                     sw.WriteLine("{");
+                    sw.Write("\t");
                 }
-                sw.WriteLine(String.Format("\"Language\" \"{0}\" ", local));
-                sw.WriteLine("\"Tokens\"");
-                sw.WriteLine("{");
+                sw.WriteLine(String.Format("\"" + LanguageKey + "\"\t\"{0}\"", local));
+                sw.WriteLine();
+                sw.WriteLine("\t\"" + TokensKey + "\"");
+                sw.WriteLine("\t{");
                 foreach (var d in data)
                 {
                     if (d.ID != null)
@@ -350,16 +358,16 @@ namespace VGUILocalizationTool
                         loc = loc.Replace("\"", "\\\"");
                         string line = String.Format("{0}\"{1}\"{2}\"{3}\"", d.DelimeterID, d.ID, d.DelimeterLocalized, loc);
                         sw.WriteLine(line);
-                        if (WithEnglishText && d.EnglishOld != null)
+                        if (WithEnglishText)
                         {
                             string eng;
-                            if (!d.EnglishTextChanged)
+                            if (d.EnglishTextChanged)
                             {
-                                eng = d.English;
+                                eng = d.EnglishOld;
                             }
                             else
                             {
-                                eng = d.EnglishOld;
+                                eng = d.English;
                             }
                             if (d.UseSlashN)
                             {
@@ -375,11 +383,11 @@ namespace VGUILocalizationTool
                         sw.WriteLine(d.DelimeterID);
                     }
                 }
-                sw.WriteLine("}");
-                if (!WithoutLang)
+                if (LangKey != null)
                 {
-                    sw.WriteLine("}");
+                    sw.WriteLine("\t}");
                 }
+                sw.WriteLine("}");
                 sw.Close();
             }
         }
