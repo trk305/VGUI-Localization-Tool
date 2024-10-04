@@ -15,6 +15,7 @@ namespace VGUILocalizationTool
         public MainForm()
         {
             InitializeComponent();
+            cbLocal.SelectedIndexChanged += cbLocal_SelectedIndexChanged;
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -151,7 +152,11 @@ namespace VGUILocalizationTool
             }
             lblPerc.Text = String.Format("{0:F}%", (1.0f * lcount / tcount) * 100);
             localizationDataBindingSource.DataSource = eng;
+
+            cbLocal.Items.Add("english");
+            cbLocal.SelectedItem = "english";
         }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
