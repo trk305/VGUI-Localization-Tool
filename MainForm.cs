@@ -251,5 +251,10 @@ namespace VGUILocalizationTool
             dialog.mainForm = this;
             dialog.Show();
         }
+
+        private void cbSaveBackup_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

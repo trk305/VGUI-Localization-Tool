@@ -159,7 +159,7 @@
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Location = new System.Drawing.Point(517, 35);
+            this.btnAdd.Location = new System.Drawing.Point(516, 33);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(56, 22);
@@ -207,13 +207,14 @@
             this.cbSaveBackup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSaveBackup.AutoSize = true;
             this.cbSaveBackup.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::VGUILocalizationTool.Properties.Settings.Default, "SaveBackup", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cbSaveBackup.Location = new System.Drawing.Point(260, 7);
+            this.cbSaveBackup.Location = new System.Drawing.Point(256, 7);
             this.cbSaveBackup.Margin = new System.Windows.Forms.Padding(2);
             this.cbSaveBackup.Name = "cbSaveBackup";
             this.cbSaveBackup.Size = new System.Drawing.Size(87, 17);
             this.cbSaveBackup.TabIndex = 10;
             this.cbSaveBackup.Text = "Save backup";
             this.cbSaveBackup.UseVisualStyleBackColor = true;
+            this.cbSaveBackup.CheckedChanged += new System.EventHandler(this.cbSaveBackup_CheckedChanged);
             // 
             // btFind
             // 
@@ -221,7 +222,7 @@
             this.btFind.Location = new System.Drawing.Point(562, 31);
             this.btFind.Margin = new System.Windows.Forms.Padding(2);
             this.btFind.Name = "btFind";
-            this.btFind.Size = new System.Drawing.Size(56, 22);
+            this.btFind.Size = new System.Drawing.Size(56, 24);
             this.btFind.TabIndex = 8;
             this.btFind.Text = "Find...";
             this.btFind.UseVisualStyleBackColor = true;
@@ -288,10 +289,10 @@
             // btnNext
             // 
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNext.Location = new System.Drawing.Point(562, 57);
+            this.btnNext.Location = new System.Drawing.Point(562, 59);
             this.btnNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(56, 22);
+            this.btnNext.Size = new System.Drawing.Size(56, 21);
             this.btnNext.TabIndex = 9;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
