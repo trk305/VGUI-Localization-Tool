@@ -292,7 +292,7 @@
             this.btnNext.Location = new System.Drawing.Point(562, 59);
             this.btnNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(56, 21);
+            this.btnNext.Size = new System.Drawing.Size(56, 23);
             this.btnNext.TabIndex = 9;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
