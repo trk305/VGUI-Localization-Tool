@@ -15,7 +15,6 @@ namespace VGUILocalizationTool
         public MainForm()
         {
             InitializeComponent();
-            cbLocal.SelectedIndexChanged += cbLocal_SelectedIndexChanged;
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -32,17 +31,30 @@ namespace VGUILocalizationTool
                 openFileDialog1.InitialDirectory = path;
                 string fileName = Path.GetFileNameWithoutExtension(tbEnglish.Text);
                 int pos = fileName.IndexOf("_english");
-                if (pos >= 0)
+
+                // Check if this is an English file
+                bool isEnglishFile = pos >= 0;
+
+                if (isEnglishFile)
                 {
                     fileName = fileName.Remove(pos);
                     pos++;
                 }
+
                 string ext = Path.GetExtension(tbEnglish.Text);
-                var allfiles = 
-                    from s in Directory.GetFiles(path+"\\", fileName + "*" + ext)
+                var allfiles =
+                    from s in Directory.GetFiles(path + "\\", fileName + "*" + ext)
                     orderby s
                     select Path.GetFileNameWithoutExtension(s);
+
                 cbLocal.Items.Clear();
+
+                // Add "english" to the combobox if this is an English file
+                if (isEnglishFile)
+                {
+                    cbLocal.Items.Add("english");
+                }
+
                 foreach (string fn in allfiles)
                 {
                     if (fn.IndexOf("_english") == -1)
@@ -53,10 +65,15 @@ namespace VGUILocalizationTool
 
                 localizationDataBindingSource.DataSource = new List<LocalizationData>();
                 lblPerc.Text = "";
-                if (Properties.Settings.Default.DefLang != "")
+
+                // If this is an English file, select "english" by default
+                if (isEnglishFile)
+                {
+                    cbLocal.SelectedItem = "english";
+                }
+                else if (Properties.Settings.Default.DefLang != "")
                 {
                     int i = cbLocal.Items.IndexOf(Properties.Settings.Default.DefLang);
-
                     if (i >= 0)
                     {
                         cbLocal.SelectedIndex = i;
@@ -152,11 +169,7 @@ namespace VGUILocalizationTool
             }
             lblPerc.Text = String.Format("{0:F}%", (1.0f * lcount / tcount) * 100);
             localizationDataBindingSource.DataSource = eng;
-
-            cbLocal.Items.Add("english");
-            cbLocal.SelectedItem = "english";
         }
-
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -257,9 +270,60 @@ namespace VGUILocalizationTool
             dialog.Show();
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void cbSaveBackup_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+        private void settings_Click(object sender, EventArgs e)
+        {
+            Form1 settingsForm = new Form1();
+            settingsForm.ShowDialog(this); // Pass MainForm as owner
+        }
+
+        public void ApplyTheme(bool darkMode)
+        {
+            this.BackColor = darkMode ? Color.FromArgb(20, 20, 20) : SystemColors.Control;
+            this.ForeColor = darkMode ? Color.White : Color.Black;
+
+            // Update all controls
+            UpdateControlColors(this, darkMode);
+        }
+
+        private void UpdateControlColors(Control parent, bool darkMode)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                control.BackColor = darkMode ? Color.FromArgb(30, 30, 30) : SystemColors.Window;
+                control.ForeColor = darkMode ? Color.White : Color.Black;
+
+                // Special handling for specific controls
+                if (control is TextBox textBox)
+                {
+                    textBox.BackColor = darkMode ? Color.FromArgb(50, 50, 50) : SystemColors.Window;
+                    textBox.ForeColor = darkMode ? Color.White : Color.Black;
+                }
+                else if (control is ComboBox comboBox)
+                {
+                    comboBox.BackColor = darkMode ? Color.FromArgb(50, 50, 50) : SystemColors.Window;
+                    comboBox.ForeColor = darkMode ? Color.White : Color.Black;
+                }
+                else if (control is Button button)
+                {
+                    button.BackColor = darkMode ? Color.FromArgb(70, 70, 70) : SystemColors.Control;
+                    button.ForeColor = darkMode ? Color.White : Color.Black;
+                }
+
+                // Recursively update child controls
+                if (control.HasChildren)
+                {
+                    UpdateControlColors(control, darkMode);
+                }
+            }
         }
     }
 }

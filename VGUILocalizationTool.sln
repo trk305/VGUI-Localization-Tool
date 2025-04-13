@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.11.35222.181
+VisualStudioVersion = 17.13.35818.85 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VGUILocalizationTool", "VGUILocalizationTool.csproj", "{2E44FEC0-E3D1-4F79-BBA2-39607A62453C}"
 EndProject
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F82925AC-D3ED-41E5-8BBA-77CB82E92A14}
+		SolutionGuid = {E24B071F-D7F8-4EE7-A56E-C5BDD83E8499}
 	EndGlobalSection
 EndGlobal

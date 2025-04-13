@@ -23,14 +23,25 @@ namespace VGUILocalizationTool
         private string GetLocalFileName(string local)
         {
             string fileName = Path.GetFileNameWithoutExtension(englishFile);
+            string ext = Path.GetExtension(englishFile);
+            string dir = Path.GetDirectoryName(englishFile);
+
+            // Handle both "_english" and "english_" prefixes
             int pos = fileName.IndexOf("_english");
+            if (pos < 0) pos = fileName.IndexOf("english_");
+
             if (pos >= 0)
             {
                 fileName = fileName.Remove(pos);
-                pos++;
             }
-            string ext = Path.GetExtension(englishFile);
-            return Path.GetDirectoryName(englishFile) + "\\" + fileName + "_" + local + ext;
+
+            // Special case for English files
+            if (local.Equals("english", StringComparison.OrdinalIgnoreCase))
+            {
+                return englishFile; // Return the original English file path
+            }
+
+            return Path.Combine(dir, $"{fileName}_{local}{ext}");
         }
 
         string[] SplitWithQuotas(string str, ref bool unterm)
